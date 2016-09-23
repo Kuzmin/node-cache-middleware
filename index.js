@@ -15,7 +15,11 @@ const DEFAULT_OPTIONS = {
   testRequest: req => req.method === 'GET',
 
   // Cache key
-  keyFunction: req => req.originalUrl || req.url,
+  keyFunction: req => [
+    req.originalUrl,
+    req.header('accepts'),
+    req.header('accept-encoding')
+  ].join('.')
 };
 
 const cache = new MemoryCacheAdapter();
