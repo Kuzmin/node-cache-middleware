@@ -1,0 +1,16 @@
+{
+  "name": "node-cache-middleware",
+  "version": "1.0.0",
+  "description": "Simple caching middleware for Connect/Express-based applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "lodash": "^4.16.1",
+    "memory-cache": "^0.1.6"
+  }
+}
