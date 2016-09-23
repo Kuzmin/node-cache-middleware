@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS = {
 
   // Test function that returns true/false depending on if the request should
   // be cached or not, defaults to only caching GET requests
-  testRequest: req => req.method +== 'GET',
+  testRequest: req => req.method === 'GET',
 
   // Cache key
   keyFunction: req => req.originalUrl || req.url,
