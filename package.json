@@ -6,8 +6,9 @@
   "scripts": {
     "test": "mocha test/*"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "https://github.com/Kuzmin",
+  "repository": "Kuzmin/node-cache-middleware",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.6",
     "lodash": "^4.16.1",
