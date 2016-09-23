@@ -1,7 +1,7 @@
 
 const Promise = require('bluebird');
 
-const cache = require('./adapters/memory-cache-adapter');
+const MemoryCacheAdapter = require('./adapters/memory-cache-adapter');
 const defaults = require('lodash/defaults');
 
 /**
@@ -11,29 +11,27 @@ const DEFAULT_OPTIONS = {
   durationMilliseconds: 10 * 1000,
 
   // Test function that returns true/false depending on if the request should
-  // be cached or not
-  testRequest: req => true,
+  // be cached or not, defaults to only caching GET requests
+  testRequest: req => req.method +== 'GET',
 
   // Cache key
   keyFunction: req => req.originalUrl || req.url,
 };
 
-/*
- * Clear out every-fucking-thing, might be useful
- */
-function clear() {
-  cache.clear();
-}
-
+const cache = new MemoryCacheAdapter();
 const queue = {};
 
 function sendCacheData(res, cacheData) {
-  res.statusCode = cacheObject.statusCode
-  res.set(cacheObject.headers);
-  res.end(new Buffer(cacheObject.content, "base64"))
+  res.statusCode = cacheData.statusCode
+  res.set(cacheData.headers);
+  res.end(new Buffer(cacheData.content, "base64"))
 }
 
 function middleware(options) {
+  if (!options) {
+    options = {};
+  }
+
   defaults(options, DEFAULT_OPTIONS);
 
   return (req, res, next) => {
@@ -91,7 +89,7 @@ function appendWrites(res, data) {
     return;
   }
 
-  const buf = data;
+  let buf = data;
 
   if (typeof data === "string") {
     buf = new Buffer(data);

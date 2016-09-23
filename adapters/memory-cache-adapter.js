@@ -1,5 +1,5 @@
 
-const memoryCache = require('memory-cache');
+const cache = require('memory-cache');
 const Promise = require('bluebird');
 
 /*
